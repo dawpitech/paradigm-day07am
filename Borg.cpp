@@ -7,10 +7,14 @@
 
 #include "Borg.hpp"
 
+#include <format>
 #include <iostream>
 
-Borg::Ship::Ship()
+Borg::Ship::Ship(int weaponFrequency, short repair)
 {
+    this->_weaponFrequency = weaponFrequency;
+    this->_repair = repair;
+    this->_core = nullptr;
     std::cout << ""
         "We are the Borgs. Lower your shields and surrender yourselves unconditionally.\n"
         "Your biological characteristics and technologies will be assimilated.\n"
@@ -76,4 +80,36 @@ bool Borg::Ship::move()
         return false;
     this->_location = this->_home;
     return true;
+}
+
+void Borg::Ship::fire(Federation::Starfleet::Ship* target)
+{
+    if (target == nullptr)
+        return;
+    target->setShield(target->getShield() - this->_weaponFrequency);
+    std::cout << std::format(""
+        "Firing on target with {}GW frequency.\n",
+        this->_weaponFrequency);
+}
+
+void Borg::Ship::fire(Federation::Ship* target)
+{
+    if (target == nullptr || target->getCore() == nullptr ||
+        target->getCore()->checkReactor())
+        return;
+    target->getCore()->checkReactor()->setStability(false);
+    std::cout << std::format(""
+        "Firing on target with {}GW frequency.\n",
+        this->_weaponFrequency);
+}
+
+void Borg::Ship::repair()
+{
+    if (this->_repair == 0) {
+        std::cout << "Energy cells depleted, shield weakening.\n";
+        return;
+    }
+    std::cout << "Begin shield re-initialisation... Done. Awaiting further instructions.\n";
+    this->_repair -= 1;
+    this->_shield = 100;
 }

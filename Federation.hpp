@@ -12,6 +12,7 @@
 
     #include "WarpSystem.hpp"
     #include "Destination.hpp"
+    #include "Borg.hpp"
 
 namespace Federation
 {
@@ -42,7 +43,8 @@ namespace Federation
         class Ship
         {
             public:
-                explicit Ship(int length, int width, std::string name, short maxWarp);
+                explicit Ship(int length, int width, std::string name,
+                    short maxWarp, int torpedo = 0);
                 void setupCore(WarpSystem::Core* core);
                 void checkCore();
                 void promote(Captain *captain);
@@ -50,6 +52,12 @@ namespace Federation
                 bool move(int warp);
                 bool move(Destination d);
                 bool move();
+                int getShield() { return this->_shield; }
+                void setShield(int shield) { this->_shield = shield; }
+                int getTorpedo() { return this->_photonTorpedo; }
+                void setTorpedo(int torpedo) { this->_photonTorpedo = torpedo; }
+                void fire(Borg::Ship *target);
+                void fire(int torpedoes, Borg::Ship *target);
 
             protected:
                 int _length;
@@ -60,6 +68,8 @@ namespace Federation
                 Captain* _captain;
                 Destination _home = EARTH;
                 Destination _location = _home;
+                int _shield = 100;
+                int _photonTorpedo;
         };
     }
 
@@ -73,6 +83,7 @@ namespace Federation
         bool move(int warp);
         bool move(Destination d);
         bool move();
+        WarpSystem::Core* getCore() { return this->_core; }
 
     protected:
         int _length;

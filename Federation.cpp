@@ -23,19 +23,53 @@ Federation::Starfleet::Ensign::Ensign(std::string name)
     std::cout << std::format("Ensign {}, awaiting orders.\n", name);
 }
 
-Federation::Starfleet::Ship::Ship(int length, int width, std::string name, short maxWarp)
+Federation::Starfleet::Ship::Ship(int length, int width, std::string name,
+    short maxWarp, int torpedo)
 {
-    std::cout << std::format(""
-        "The ship USS {} has been finished.\n"
-        "It is {} m in length and {} m in width.\n"
-        "It can go to Warp {}!\n",
-        name, length, width, maxWarp);
     this->_length = length;
     this->_width = width;
     this->_name = name;
     this->_maxWarp = maxWarp;
     this->_core = nullptr;
     this->_captain = nullptr;
+    this->_photonTorpedo = torpedo;
+    std::cout << std::format(""
+        "The ship USS {} has been finished.\n"
+        "It is {} m in length and {} m in width.\n"
+        "It can go to Warp {}!\n",
+        name, length, width, maxWarp);
+    if (this->_photonTorpedo != 0)
+        std::cout << std::format(""
+            "Weapons are set: {} torpedoes ready.\n",
+            this->_photonTorpedo);
+}
+
+void Federation::Starfleet::Ship::fire(Borg::Ship *target)
+{
+    return this->fire(1, target);
+}
+
+void Federation::Starfleet::Ship::fire(int torpedoes, Borg::Ship *target)
+{
+    if (torpedoes > this->getTorpedo()) {
+        if (this->_captain == nullptr)
+            return;
+        std::cout << std::format(""
+            "{}: Not enough torpedoes to fire, {}!",
+            this->_name, this->_captain->getName());
+        return;
+    }
+    this->_photonTorpedo -= torpedoes;
+    std::cout << std::format(""
+        "{}: Firing on target. {} torpedoes remaining.\n",
+        this->_name, this->_photonTorpedo);
+    if (this->_photonTorpedo == 0) {
+        if (this->_captain == nullptr)
+            return;
+        std::cout << std::format(""
+            "{}: No more torpedo to fire, {}!\n",
+            this->_name, this->_captain->getName());
+    }
 }
 
 void Federation::Starfleet::Ship::setupCore(WarpSystem::Core* core)
