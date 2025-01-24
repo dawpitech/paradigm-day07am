@@ -65,7 +65,49 @@ void Federation::Starfleet::Ship::promote(Captain* captain)
         captain->getName(), this->_name);
 }
 
+bool Federation::Starfleet::Ship::move(int warp, Destination d)
+{
+    if (warp > this->_maxWarp)
+        return false;
+    if (d == this->_location)
+        return false;
+    if (this->_core == nullptr || this->_core->checkReactor() == nullptr ||
+        !this->_core->checkReactor()->isStable())
+        return false;
+    this->_location = d;
+    return true;
+}
 
+bool Federation::Starfleet::Ship::move(int warp)
+{
+    if (warp > this->_maxWarp)
+        return false;
+    if (this->_core == nullptr || this->_core->checkReactor() == nullptr ||
+        !this->_core->checkReactor()->isStable())
+        return false;
+    this->_location = this->_home;
+    return true;
+}
+
+bool Federation::Starfleet::Ship::move(Destination d)
+{
+    if (d == this->_location)
+        return false;
+    if (this->_core == nullptr || this->_core->checkReactor() == nullptr ||
+        !this->_core->checkReactor()->isStable())
+        return false;
+    this->_location = d;
+    return true;
+}
+
+bool Federation::Starfleet::Ship::move()
+{
+    if (this->_core == nullptr || this->_core->checkReactor() == nullptr ||
+        !this->_core->checkReactor()->isStable())
+        return false;
+    this->_location = this->_home;
+    return true;
+}
 
 Federation::Ship::Ship(int length, int width, std::string name)
 {
@@ -94,4 +136,48 @@ void Federation::Ship::checkCore()
     std::cout << std::format(""
     "{}: The core is {} at the time.\n",
     this->_name, stabilityToStr(this->_core->checkReactor()->isStable()));
+}
+
+bool Federation::Ship::move(int warp, Destination d)
+{
+    if (warp > this->_maxWarp)
+        return false;
+    if (d == this->_location)
+        return false;
+    if (this->_core == nullptr || this->_core->checkReactor() == nullptr ||
+        !this->_core->checkReactor()->isStable())
+        return false;
+    this->_location = d;
+    return true;
+}
+
+bool Federation::Ship::move(int warp)
+{
+    if (warp > this->_maxWarp)
+        return false;
+    if (this->_core == nullptr || this->_core->checkReactor() == nullptr ||
+        !this->_core->checkReactor()->isStable())
+        return false;
+    this->_location = this->_home;
+    return true;
+}
+
+bool Federation::Ship::move(Destination d)
+{
+    if (d == this->_location)
+        return false;
+    if (this->_core == nullptr || this->_core->checkReactor() == nullptr ||
+        !this->_core->checkReactor()->isStable())
+        return false;
+    this->_location = d;
+    return true;
+}
+
+bool Federation::Ship::move()
+{
+    if (this->_core == nullptr || this->_core->checkReactor() == nullptr ||
+        !this->_core->checkReactor()->isStable())
+        return false;
+    this->_location = this->_home;
+    return true;
 }
