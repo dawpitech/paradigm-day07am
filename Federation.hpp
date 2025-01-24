@@ -27,15 +27,15 @@ namespace Federation
 
         class Captain
         {
-        public:
-            explicit Captain(std::string name) { this->_name = name; }
-            std::string getName() { return _name; }
-            int getAge() { return _age; }
-            void setAge(int age) { this->_age = age; }
+            public:
+                explicit Captain(std::string name) { this->_name = name; }
+                std::string getName() { return _name; }
+                int getAge() { return _age; }
+                void setAge(int age) { this->_age = age; }
 
-        protected:
-            std::string _name;
-            int _age = -1;
+            protected:
+                std::string _name;
+                int _age = -1;
         };
 
         class Ship
