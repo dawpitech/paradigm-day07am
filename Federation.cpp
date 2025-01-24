@@ -70,6 +70,7 @@ void Federation::Starfleet::Ship::fire(int torpedoes, Borg::Ship *target)
             "{}: No more torpedo to fire, {}!\n",
             this->_name, this->_captain->getName());
     }
+    target->setShield(target->getShield() - 50 * torpedoes);
 }
 
 void Federation::Starfleet::Ship::setupCore(WarpSystem::Core* core)

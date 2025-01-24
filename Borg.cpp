@@ -6,6 +6,7 @@
 */
 
 #include "Borg.hpp"
+#include "Federation.hpp"
 
 #include <format>
 #include <iostream>
@@ -95,7 +96,7 @@ void Borg::Ship::fire(Federation::Starfleet::Ship* target)
 void Borg::Ship::fire(Federation::Ship* target)
 {
     if (target == nullptr || target->getCore() == nullptr ||
-        target->getCore()->checkReactor())
+        target->getCore()->checkReactor() == nullptr)
         return;
     target->getCore()->checkReactor()->setStability(false);
     std::cout << std::format(""

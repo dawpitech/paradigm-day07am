@@ -8,10 +8,18 @@
 #ifndef BORG_HPP
     #define BORG_HPP
 
-#include <Federation.hpp>
-
     #include "WarpSystem.hpp"
     #include "Destination.hpp"
+
+namespace Federation
+{
+    class Ship;
+}
+
+namespace Federation::Starfleet
+{
+    class Ship;
+}
 
 namespace Borg
 {
