@@ -41,6 +41,8 @@ void Federation::Starfleet::Ship::setupCore(WarpSystem::Core* core)
 
 void Federation::Starfleet::Ship::checkCore()
 {
+    if (this->_core->checkReactor() == nullptr)
+        return;
     std::cout << std::format(""
     "USS {}: The core is {} at the time.\n",
     this->_name, stabilityToStr(this->_core->checkReactor()->isStable()));
@@ -69,6 +71,8 @@ void Federation::Ship::setupCore(WarpSystem::Core* core)
 
 void Federation::Ship::checkCore()
 {
+    if (this->_core->checkReactor() == nullptr)
+        return;
     std::cout << std::format(""
     "{}: The core is {} at the time.\n",
     this->_name, stabilityToStr(this->_core->checkReactor()->isStable()));
