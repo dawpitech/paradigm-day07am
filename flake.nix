@@ -27,6 +27,7 @@
             man-pages
             man-pages-posix
             gdb
+            mold
           ] ++ deps;
         };
 
