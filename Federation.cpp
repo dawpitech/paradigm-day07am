@@ -17,6 +17,12 @@ static std::string stabilityToStr(const bool stability)
     return "unstable";
 }
 
+Federation::Starfleet::Ensign::Ensign(std::string name)
+{
+    this->_name = name;
+    std::cout << std::format("Ensign {}, awaiting orders.\n", name);
+}
+
 Federation::Starfleet::Ship::Ship(int length, int width, std::string name, short maxWarp)
 {
     std::cout << std::format(""
@@ -29,6 +35,7 @@ Federation::Starfleet::Ship::Ship(int length, int width, std::string name, short
     this->_name = name;
     this->_maxWarp = maxWarp;
     this->_core = nullptr;
+    this->_captain = nullptr;
 }
 
 void Federation::Starfleet::Ship::setupCore(WarpSystem::Core* core)
@@ -44,9 +51,20 @@ void Federation::Starfleet::Ship::checkCore()
     if (this->_core->checkReactor() == nullptr)
         return;
     std::cout << std::format(""
-    "USS {}: The core is {} at the time.\n",
+        "USS {}: The core is {} at the time.\n",
     this->_name, stabilityToStr(this->_core->checkReactor()->isStable()));
 }
+
+void Federation::Starfleet::Ship::promote(Captain* captain)
+{
+    if (captain == nullptr)
+        return;
+    this->_captain = _captain;
+    std::cout << std::format(""
+        "{}: I'm glad to be the captain of the USS {}.\n",
+        captain->getName(), this->_name);
+}
+
 
 
 Federation::Ship::Ship(int length, int width, std::string name)

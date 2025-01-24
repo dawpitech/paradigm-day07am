@@ -20,9 +20,10 @@ CPPFLAGS	+=	-iquote .
 
 BDIR	=	.build/release
 
-SRC	=	bonus/code_d07am.cpp
+SRC	=	mains/ex01.cpp
 SRC	+=	Federation.cpp
 SRC	+=	WarpSystem.cpp
+SRC	+=	Borg.cpp
 
 OBJ = $(SRC:%.cpp=$(BDIR)/%.o)
 

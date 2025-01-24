@@ -16,12 +16,35 @@ namespace Federation
 {
     namespace Starfleet
     {
+        class Ensign
+        {
+            public:
+                explicit Ensign(std::string name);
+
+            protected:
+                std::string _name;
+        };
+
+        class Captain
+        {
+        public:
+            explicit Captain(std::string name) { this->_name = name; }
+            std::string getName() { return _name; }
+            int getAge() { return _age; }
+            void setAge(int age) { this->_age = age; }
+
+        protected:
+            std::string _name;
+            int _age = -1;
+        };
+
         class Ship
         {
             public:
                 explicit Ship(int length, int width, std::string name, short maxWarp);
                 void setupCore(WarpSystem::Core* core);
                 void checkCore();
+                void promote(Captain *captain);
 
             protected:
                 int _length;
@@ -29,6 +52,7 @@ namespace Federation
                 std::string _name;
                 short _maxWarp;
                 WarpSystem::Core* _core;
+                Captain* _captain;
         };
     }
 
